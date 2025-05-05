@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.correct-answer {
+  background-color: #4CAF50 !important;
+  color: white !important;
+}
+
+.wrong-answer {
+  background-color: #F44336 !important;
+  color: white !important;
+}

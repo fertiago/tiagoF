@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculatrice</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div id="app">
+        <header id="header">
+            <div id="navigation"></div>
+            <div id="theme"></div>
+        </header>
+        <main id="main">
+            <div class="min-w-screen  bg-gray-100 flex items-center justify-center px-5 py-5">
+                <div class="mx-auto rounded-xl bg-gray-100 shadow-xl text-gray-800 relative overflow-hidden">
+                    <div
+                        class="w-full h-48 bg-gradient-to-b from-gray-800 to-gray-700 flex flex-col items-end justify-end text-right">
+                        <div class="w-full max-h-24 overflow-y-auto px-8 py-2 text-base text-gray-400 font-thin text-right"
+                            id="history-display"></div>
+                        <div class="w-full py-2 px-8 text-2xl text-gray-300 font-thin" id="operation-display"></div>
+                        <div class="w-full py-3 px-8 text-6xl text-white font-thin" id="display">0</div>
+                    </div>
+
+                    <div class="w-full p-3">
+                        <div class="join join-vertical w-full">
+                            <div class="join w-full">
+                                <button class="btn btn-md join-item flex-1 text-white" id="clear">C</button>
+                                <button class="btn btn-md join-item flex-1 text-white" id="plusMinus">+/-</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-operation="%">%</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-operation="/">÷</button>
+                            </div>
+
+                            <div class="join w-full">
+                                <button class="btn btn-md join-item flex-1 text-white" data-number="7">7</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-number="8">8</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-number="9">9</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-operation="*">⨉</button>
+                            </div>
+
+                            <div class="join w-full">
+                                <button class="btn btn-md join-item flex-1 text-white" data-number="4">4</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-number="5">5</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-number="6">6</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-operation="-">-</button>
+                            </div>
+
+                            <div class="join w-full">
+                                <button class="btn btn-md join-item flex-1 text-white" data-number="1">1</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-number="2">2</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-number="3">3</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-operation="+">+</button>
+                            </div>
+
+                            <div class="join w-full">
+                                <button class="btn btn-md join-item flex-1 text-white" data-number="0">0</button>
+                                <button class="btn btn-md join-item flex-1 text-white" data-number=".">.</button>
+                                <button class="btn btn-md join-item flex-1 text-white" id="equals">=</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer id="footer"></footer>
+    </div>
+    <script type="module" src="/src/scripts/style.js"></script>
+    <script type="module" src="/src/scripts/calculatrice.js"></script>
+</body>
+
+</html>
