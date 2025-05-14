@@ -6,8 +6,37 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculatrice</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Vous pouvez ajouter ces styles localement pour tester */
+        .calc-bg {
+            background-color: var(--color-base-100);
+        }
+
+        .calc-display-bg {
+            background-color: var(--color-base-200);
+        }
+
+        .btn-number {
+            background-color: var(--color-base-300);
+            color: var(--color-base-content);
+        }
+
+        .btn-operation {
+            background-color: var(--color-primary);
+            color: var(--color-primary-content);
+        }
+
+        .btn-equals {
+            background-color: var(--color-secondary);
+            color: var(--color-secondary-content);
+        }
+
+        .btn-clear {
+            color: var(--color-error);
+        }
+    </style>
 </head>
 
 <body>
@@ -17,52 +46,121 @@
             <div id="theme"></div>
         </header>
         <main id="main">
-            <div class="min-w-screen  bg-gray-100 flex items-center justify-center px-5 py-5">
-                <div class="mx-auto rounded-xl bg-gray-100 shadow-xl text-gray-800 relative overflow-hidden">
-                    <div
-                        class="w-full h-48 bg-gradient-to-b from-gray-800 to-gray-700 flex flex-col items-end justify-end text-right">
-                        <div class="w-full max-h-24 overflow-y-auto px-8 py-2 text-base text-gray-400 font-thin text-right"
-                            id="history-display"></div>
-                        <div class="w-full py-2 px-8 text-2xl text-gray-300 font-thin" id="operation-display"></div>
-                        <div class="w-full py-3 px-8 text-6xl text-white font-thin" id="display">0</div>
+            <div class="max-h-screen flex items-center justify-center p-4">
+                <div class="max-w-xs w-full rounded-3xl shadow-lg overflow-hidden calc-bg">
+                    <!-- Écran de la calculatrice -->
+                    <div class="p-6 pb-4 text-right calc-display-bg rounded-t-3xl">
+                        <div id="operation-display"
+                            class="text-neutral-content text-xl min-h-8 overflow-hidden text-ellipsis">
+                            60+20%</div>
+                        <div id="display"
+                            class="text-base-content text-5xl font-semibold mt-1 overflow-hidden text-ellipsis">0
+                        </div>
                     </div>
 
-                    <div class="w-full p-3">
-                        <div class="join join-vertical w-full">
-                            <div class="join w-full">
-                                <button class="btn btn-md join-item flex-1 text-white" id="clear">C</button>
-                                <button class="btn btn-md join-item flex-1 text-white" id="plusMinus">+/-</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-operation="%">%</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-operation="/">÷</button>
-                            </div>
+                    <!-- Boutons de la calculatrice -->
+                    <div class="p-4">
+                        <table class="border-spacing-5 w-full">
+                            <!-- Première rangée -->
+                            <tr>
+                                <td class="p-0">
+                                    <button id="clear"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] bg-gray-800 btn-clear text-xl rounded-xl font-bold cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">AC</button>
+                                </td>
+                                <td class="p-0">
+                                    <button id="delete"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] bg-gray-800 btn-clear text-xl rounded-xl font-bold cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">DEL</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-operation="%"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] bg-gray-900 btn-operation text-xl rounded-xl font-bold cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-800 hover:-translate-y-0.5 active:translate-y-0">%</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-operation="/"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] bg-gray-900 btn-operation text-xl rounded-xl font-bold cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-800 hover:-translate-y-0.5 active:translate-y-0">/</button>
+                                </td>
+                            </tr>
 
-                            <div class="join w-full">
-                                <button class="btn btn-md join-item flex-1 text-white" data-number="7">7</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-number="8">8</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-number="9">9</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-operation="*">⨉</button>
-                            </div>
+                            <!-- Deuxième rangée -->
+                            <tr>
+                                <td class="p-0">
+                                    <button data-number="7"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">7</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-number="8"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">8</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-number="9"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">9</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-operation="*"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] bg-gray-900 btn-operation text-xl rounded-xl font-bold cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-800 hover:-translate-y-0.5 active:translate-y-0">*</button>
+                                </td>
+                            </tr>
 
-                            <div class="join w-full">
-                                <button class="btn btn-md join-item flex-1 text-white" data-number="4">4</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-number="5">5</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-number="6">6</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-operation="-">-</button>
-                            </div>
+                            <!-- Troisième rangée -->
+                            <tr>
+                                <td class="p-0">
+                                    <button data-number="4"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">4</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-number="5"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">5</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-number="6"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">6</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-operation="-"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] bg-gray-900 btn-operation text-xl rounded-xl font-bold cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-800 hover:-translate-y-0.5 active:translate-y-0">-</button>
+                                </td>
+                            </tr>
 
-                            <div class="join w-full">
-                                <button class="btn btn-md join-item flex-1 text-white" data-number="1">1</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-number="2">2</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-number="3">3</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-operation="+">+</button>
-                            </div>
+                            <!-- Quatrième rangée -->
+                            <tr>
+                                <td class="p-0">
+                                    <button data-number="1"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">1</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-number="2"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">2</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-number="3"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">3</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-operation="+"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] bg-gray-900 btn-operation text-xl rounded-xl font-bold cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-800 hover:-translate-y-0.5 active:translate-y-0">+</button>
+                                </td>
+                            </tr>
 
-                            <div class="join w-full">
-                                <button class="btn btn-md join-item flex-1 text-white" data-number="0">0</button>
-                                <button class="btn btn-md join-item flex-1 text-white" data-number=".">.</button>
-                                <button class="btn btn-md join-item flex-1 text-white" id="equals">=</button>
-                            </div>
-                        </div>
+                            <!-- Cinquième rangée -->
+                            <tr>
+                                <td class="p-0">
+                                    <button data-number="0"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">0</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-number="00"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">00</button>
+                                </td>
+                                <td class="p-0">
+                                    <button data-number="."
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-number text-xl rounded-xl cursor-pointer transition-all duration-200 ease-in-out hover:bg-gray-700 hover:-translate-y-0.5 active:translate-y-0">.</button>
+                                </td>
+                                <td class="p-0">
+                                    <button id="equals"
+                                        class="w-full h-[60px] m-[2px] min-w-[60px] btn-equals text-xl rounded-xl font-bold cursor-pointer transition-all duration-200 ease-in-out hover:bg-amber-400 hover:-translate-y-0.5 active:translate-y-0">=</button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
